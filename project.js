@@ -82,39 +82,45 @@ const spin = () => {
   return reels;
 };
 
-const transpose = (reels) => {
-  const rows = [];
+const getImgPath = (reels) => {
   const rowsFilePath = [];
   for (i = 0; i < ROWS; i++) {
-    rows.push([]);
     rowsFilePath.push([]);
     for (j = 0; j < COLS; j++) {
       switch (reels[j][i]) {
         case "A":
-          rows[i].push(reels[j][i]);
           rowsFilePath[i].push("7.png");
           break;
         case "B":
-          rows[i].push(reels[j][i]);
           rowsFilePath[i].push("watermelon.png");
           break;
         case "C":
-          rows[i].push(reels[j][i]);
           rowsFilePath[i].push("apple.png");
           break;
         case "D":
-          rows[i].push(reels[j][i]);
           rowsFilePath[i].push("orange.png");
           break;
       }
     }
   }
+  return rowsFilePath;
+};
+
+const transpose = (reels) => {
+  const rows = [];
+  for (i = 0; i < ROWS; i++) {
+    rows.push([]);
+    for (j = 0; j < COLS; j++) {
+      rows[i].push(reels[j][i]);
+    }
+  }
   return rows;
 };
-const selectedSymbolsList = (rows) => {
+
+const selectedSymbolsList = (rowsFilePath) => {
   var list = [];
-  for (i = 0; i < rows.length; i++) {
-    list = list.concat(rows[i]);
+  for (i = 0; i < rowsFilePath.length; i++) {
+    list = list.concat(rowsFilePath[i]);
   }
   return list;
 };
@@ -124,7 +130,8 @@ const onStart = () => {
   const betAmount = getBetAmount(balance, numberOfLine);
   const reels = spin();
   const rows = transpose(reels);
-  const list = selectedSymbolsList(rows);
+  const rowsFilePath = getImgPath(reels);
+  const list = selectedSymbolsList(rowsFilePath);
 
   const imageContainer = document.querySelectorAll("img");
 
