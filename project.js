@@ -84,21 +84,27 @@ const spin = () => {
 
 const transpose = (reels) => {
   const rows = [];
+  const rowsFilePath = [];
   for (i = 0; i < ROWS; i++) {
     rows.push([]);
+    rowsFilePath.push([]);
     for (j = 0; j < COLS; j++) {
       switch (reels[j][i]) {
         case "A":
-          rows[i].push("7.png");
+          rows[i].push(reels[j][i]);
+          rowsFilePath[i].push("7.png");
           break;
         case "B":
-          rows[i].push("watermelon.png");
+          rows[i].push(reels[j][i]);
+          rowsFilePath[i].push("watermelon.png");
           break;
         case "C":
-          rows[i].push("apple.png");
+          rows[i].push(reels[j][i]);
+          rowsFilePath[i].push("apple.png");
           break;
         case "D":
-          rows[i].push("orange.png");
+          rows[i].push(reels[j][i]);
+          rowsFilePath[i].push("orange.png");
           break;
       }
     }
