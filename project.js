@@ -22,7 +22,6 @@ const deposit = () => {
     var depositAmount = prompt("Enter a deposit amount: ");
     depositAmount = parseFloat(depositAmount);
     if (depositAmount && depositAmount > 0) {
-      console.log("You deposited " + depositAmount + "$");
       return depositAmount;
     } else {
       console.log("Please enter a valid number");
@@ -88,16 +87,45 @@ const transpose = (reels) => {
   for (i = 0; i < ROWS; i++) {
     rows.push([]);
     for (j = 0; j < COLS; j++) {
-      rows[i].push(reels[j][i]);
+      switch (reels[j][i]) {
+        case "A":
+          rows[i].push("7.png");
+          break;
+        case "B":
+          rows[i].push("watermelon.png");
+          break;
+        case "C":
+          rows[i].push("apple.png");
+          break;
+        case "D":
+          rows[i].push("orange.png");
+          break;
+      }
     }
   }
   return rows;
 };
+const selectedSymbolsList = (rows) => {
+  var list = [];
+  for (i = 0; i < rows.length; i++) {
+    list = list.concat(rows[i]);
+  }
+  return list;
+};
+const onStart = () => {
+  let balance = deposit();
+  const numberOfLine = getNumberOfLine();
+  const betAmount = getBetAmount(balance, numberOfLine);
+  const reels = spin();
+  const rows = transpose(reels);
+  const list = selectedSymbolsList(rows);
 
-let balance = deposit();
-const numberOfLine = getNumberOfLine();
-const betAmount = getBetAmount(balance, numberOfLine);
-const reels = spin();
-const rows = transpose(reels);
+  const imageContainer = document.querySelectorAll("img");
 
-document.getElementById("11").innerText = rows[1][1];
+  for (i = 0; i < imageContainer.length; i++) {
+    imageContainer[i].src = "./images/" + list[i];
+  }
+};
+$(".start").click(function (e) {
+  onStart();
+});
