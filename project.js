@@ -7,9 +7,9 @@ var bet = 0;
 var line = 1;
 
 const SYMBOLS_COUNT = {
-  A: 2,
-  B: 4,
-  C: 8,
+  A: 8,
+  B: 10,
+  C: 12,
   D: 16,
   E: 32,
   F: 64,
@@ -153,25 +153,25 @@ const isWinning = (rows, line, bet, reels) => {
       var multiply;
       switch (reelCheck[0]) {
         case "A":
-          multiply = 128;
+          multiply = 192;
           break;
         case "B":
-          multiply = 64;
+          multiply = 96;
           break;
         case "C":
-          multiply = 32;
+          multiply = 48;
           break;
         case "D":
-          multiply = 16;
+          multiply = 24;
           break;
         case "E":
-          multiply = 8;
+          multiply = 12;
           break;
         case "F":
-          multiply = 4;
+          multiply = 6;
           break;
         case "G":
-          multiply = 2;
+          multiply = 3;
           break;
       }
       var profit = bet * multiply;
@@ -184,25 +184,25 @@ const isWinning = (rows, line, bet, reels) => {
       var multiply;
       switch (rowCheck[0]) {
         case "A":
-          multiply = 128;
+          multiply = 192;
           break;
         case "B":
-          multiply = 64;
+          multiply = 96;
           break;
         case "C":
-          multiply = 32;
+          multiply = 48;
           break;
         case "D":
-          multiply = 16;
+          multiply = 24;
           break;
         case "E":
-          multiply = 8;
+          multiply = 12;
           break;
         case "F":
-          multiply = 4;
+          multiply = 6;
           break;
         case "G":
-          multiply = 2;
+          multiply = 3;
           break;
       }
       var profit = bet * multiply;
