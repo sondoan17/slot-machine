@@ -9,8 +9,11 @@ var line = 1;
 const SYMBOLS_COUNT = {
   A: 2,
   B: 4,
-  C: 6,
-  D: 8,
+  C: 8,
+  D: 16,
+  E: 32,
+  F: 64,
+  G: 128
 };
 
 const SYMBOLS_PAY = {
@@ -101,13 +104,22 @@ const getImgPath = (reels) => {
           rowsFilePath[i].push("7.png");
           break;
         case "B":
-          rowsFilePath[i].push("watermelon.png");
+          rowsFilePath[i].push("treasure.png");
           break;
         case "C":
-          rowsFilePath[i].push("apple.png");
+          rowsFilePath[i].push("diamond.png");
           break;
         case "D":
           rowsFilePath[i].push("orange.png");
+          break;
+        case "E":
+          rowsFilePath[i].push("watermelon.png");
+          break;
+        case "F":
+          rowsFilePath[i].push("apple.png");
+          break;
+        case "G":
+          rowsFilePath[i].push("cherry.png");
           break;
       }
     }
@@ -133,20 +145,91 @@ const selectedSymbolsList = (rowsFilePath) => {
   }
   return list;
 };
+
+const isWinning = (rows, line, bet, reels) => {
+  for (i = 0; i < line; i++) {
+    var reelCheck = reels[i];
+    if (reelCheck.every((value, index, arr) => value === arr[0])) {
+      var multiply;
+      switch (reelCheck[0]) {
+        case "A":
+          multiply = 128;
+          break;
+        case "B":
+          multiply = 64;
+          break;
+        case "C":
+          multiply = 32;
+          break;
+        case "D":
+          multiply = 16;
+          break;
+        case "E":
+          multiply = 8;
+          break;
+        case "F":
+          multiply = 4;
+          break;
+        case "G":
+          multiply = 2;
+          break;
+      }
+      var profit = bet * multiply;
+      console.log(profit);
+      balance = balance + profit;
+      $("#balance").text("Balance: " + balance + "$");
+    }
+    var rowCheck = rows[i];
+    if (rowCheck.every((value, index, arr) => value === arr[0])) {
+      var multiply;
+      switch (rowCheck[0]) {
+        case "A":
+          multiply = 128;
+          break;
+        case "B":
+          multiply = 64;
+          break;
+        case "C":
+          multiply = 32;
+          break;
+        case "D":
+          multiply = 16;
+          break;
+        case "E":
+          multiply = 8;
+          break;
+        case "F":
+          multiply = 4;
+          break;
+        case "G":
+          multiply = 2;
+          break;
+      }
+      var profit = bet * multiply;
+      console.log(profit);
+      balance = balance + profit;
+      $("#balance").text("Balance: " + balance + "$");
+    } else {
+      balance = balance - bet;
+      $("#balance").text("Balance: " + balance + "$");
+    }
+  }
+};
+
+const applyImage = (list) => {
+  const imageContainer = document.querySelectorAll("img");
+  for (i = 0; i < imageContainer.length; i++) {
+    imageContainer[i].src = "./images/" + list[i];
+  }
+};
+
 const onStart = () => {
-  // let balance = deposit();
-  // const numberOfLine = getNumberOfLine();
-  // const betAmount = getBetAmount(balance, numberOfLine);
   const reels = spin();
   const rows = transpose(reels);
   const rowsFilePath = getImgPath(reels);
   const list = selectedSymbolsList(rowsFilePath);
-
-  const imageContainer = document.querySelectorAll("img");
-
-  for (i = 0; i < imageContainer.length; i++) {
-    imageContainer[i].src = "./images/" + list[i];
-  }
+  applyImage(list);
+  isWinning(rows, line, bet, reels);
 };
 $(".start").click(function (e) {
   onStart();

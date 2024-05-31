@@ -40,6 +40,17 @@ body{
     height: 3rem;
 }
 .deposit-container, .bet-amount-container, .line-container{
-    display: inline-flex;
+    display: flex;
+    align-items: center;
     width: auto;
+    
+}
+p{
+    font-size: 1.5rem;
+    margin-right: 20px;
+}
+.deposit-btn, .change-ln-btn, .change-ba-btn{
+    border-radius: 10%;
+    width: 5rem;
+    height: 2rem;
 }
