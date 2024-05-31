@@ -1,4 +1,4 @@
-// const prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")();
 
 const ROWS = 3;
 const COLS = 3;
@@ -13,14 +13,7 @@ const SYMBOLS_COUNT = {
   D: 16,
   E: 32,
   F: 64,
-  G: 128
-};
-
-const SYMBOLS_PAY = {
-  A: 5,
-  B: 4,
-  C: 3,
-  D: 2,
+  G: 128,
 };
 
 const deposit = () => {
