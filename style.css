@@ -2,9 +2,12 @@ img{
     width: 50px;
     height: 50px;
 }
+h1{
+    margin-bottom: 50px;
+}
 body{
     width: auto;
-    height: 95vh;
+    height: 98vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,4 +38,8 @@ body{
     margin-top: 30px;
     width: 5rem;
     height: 3rem;
+}
+.deposit-container, .bet-amount-container, .line-container{
+    display: inline-flex;
+    width: auto;
 }

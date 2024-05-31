@@ -2,6 +2,9 @@
 
 const ROWS = 3;
 const COLS = 3;
+var balance = 0;
+var bet = 0;
+var line = 1;
 
 const SYMBOLS_COUNT = {
   A: 2,
@@ -22,9 +25,11 @@ const deposit = () => {
     var depositAmount = prompt("Enter a deposit amount: ");
     depositAmount = parseFloat(depositAmount);
     if (depositAmount && depositAmount > 0) {
+      balance = depositAmount;
+      $("#balance").text("Balance: " + balance + "$");
       return depositAmount;
     } else {
-      console.log("Please enter a valid number");
+      alert("Please enter a valid number");
     }
   }
 };
@@ -34,6 +39,8 @@ const getNumberOfLine = () => {
     var numberOfLine = prompt("Enter number of line (1-3): ");
     numberOfLine = parseFloat(numberOfLine);
     if (numberOfLine && numberOfLine > 0 && numberOfLine <= 3) {
+      $("#number-of-line").text("Number of line: " + numberOfLine);
+      line = numberOfLine;
       return numberOfLine;
     } else {
       console.log("Please enter a valid number");
@@ -50,6 +57,8 @@ const getBetAmount = (balance, numberOfLine) => {
     );
     betAmount = parseFloat(betAmount);
     if (betAmount > 0 && betAmount <= Math.floor(balance / numberOfLine)) {
+      $("#bet-amount").text("Bet Amount: " + betAmount + "$");
+      bet = betAmount;
       return betAmount;
     } else {
       console.log("Please enter a valid number");
@@ -125,9 +134,9 @@ const selectedSymbolsList = (rowsFilePath) => {
   return list;
 };
 const onStart = () => {
-  let balance = deposit();
-  const numberOfLine = getNumberOfLine();
-  const betAmount = getBetAmount(balance, numberOfLine);
+  // let balance = deposit();
+  // const numberOfLine = getNumberOfLine();
+  // const betAmount = getBetAmount(balance, numberOfLine);
   const reels = spin();
   const rows = transpose(reels);
   const rowsFilePath = getImgPath(reels);
@@ -141,4 +150,16 @@ const onStart = () => {
 };
 $(".start").click(function (e) {
   onStart();
+});
+
+$(".deposit-btn").click(function () {
+  deposit();
+});
+
+$(".change-ln-btn").click(function () {
+  getNumberOfLine();
+});
+
+$(".change-ba-btn").click(function () {
+  getBetAmount(balance, line);
 });
